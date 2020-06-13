@@ -34,6 +34,7 @@
     <None Include="app.ts" />
     <None Include="routes\index.ts" />
     <None Include="routes\player.ts" />
+    <Content Include=".buildpacks" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\main.css" />
