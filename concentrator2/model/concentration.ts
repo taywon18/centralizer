@@ -1,10 +1,14 @@
 import { Blip } from "./Blip"
 import { Person } from "./Person"
+import { Message } from "./Message";
+import { MessageContainer } from "./MessageContainer";
+
 
 class Concentration {
     LastPerson: Map<string, Person> = new Map<string, Person>();
+    LastMessages: MessageContainer = new MessageContainer();
 
-    flush() {
+    flushPerson() {
         for (let [k, v] of this.LastPerson) {
             const dt = (new Date()).valueOf() - v.lastRefresh.valueOf();
             if (dt > 60000)
@@ -12,12 +16,22 @@ class Concentration {
         }
     }
 
-    push(person: Person) {
+    pushPerson(person: Person) {
         this.LastPerson.set(person.name, person);
     }
 
+    pushMessage(msg: Message) {
+        this.LastMessages.push(msg);
+    }
+
+    messages(): Message[] {
+        return this.LastMessages.all().sort((a: Message, b: Message) => {
+            return a.date.getTime() - b.date.getTime();
+        });
+    }
+
     persons(): Person[] {
-        this.flush();
+        this.flushPerson();
 
         const ret: Person[] = [];
         for (const [k, v] of this.LastPerson) {
@@ -28,7 +42,7 @@ class Concentration {
     }
 
     blips(): Blip[] {
-        this.flush();
+        this.flushPerson();
 
         const ret: Blip[] = [];
 

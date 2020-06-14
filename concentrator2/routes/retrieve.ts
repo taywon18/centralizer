@@ -10,7 +10,8 @@ router.get('/', (req: express.Request, res: express.Response) => {
 	try {
 		let ret = {
 			blips: concentrator.blips(),
-			persons: concentrator.persons()
+			persons: concentrator.persons(),
+			messages: concentrator.messages()
 		};
 		res.json(ret).status(200).end();
 	}

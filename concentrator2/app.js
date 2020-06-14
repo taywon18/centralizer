@@ -7,6 +7,7 @@ const cors = require("cors");
 const index_1 = require("./routes/index");
 const player_1 = require("./routes/player");
 const retrieve_1 = require("./routes/retrieve");
+const push_1 = require("./routes/push");
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -17,6 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index_1.default);
 app.use('/player', player_1.default);
 app.use('/retrieve', retrieve_1.default);
+app.use('/push', push_1.default);
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
     const err = new Error('Not Found');

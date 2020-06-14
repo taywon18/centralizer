@@ -2,22 +2,32 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.concentrator = void 0;
 const Blip_1 = require("./Blip");
+const MessageContainer_1 = require("./MessageContainer");
 class Concentration {
     constructor() {
         this.LastPerson = new Map();
+        this.LastMessages = new MessageContainer_1.MessageContainer();
     }
-    flush() {
+    flushPerson() {
         for (let [k, v] of this.LastPerson) {
             const dt = (new Date()).valueOf() - v.lastRefresh.valueOf();
             if (dt > 60000)
                 this.LastPerson.delete(k);
         }
     }
-    push(person) {
+    pushPerson(person) {
         this.LastPerson.set(person.name, person);
     }
+    pushMessage(msg) {
+        this.LastMessages.push(msg);
+    }
+    messages() {
+        return this.LastMessages.all().sort((a, b) => {
+            return a.date.getTime() - b.date.getTime();
+        });
+    }
     persons() {
-        this.flush();
+        this.flushPerson();
         const ret = [];
         for (const [k, v] of this.LastPerson) {
             ret.push(v);
@@ -25,7 +35,7 @@ class Concentration {
         return ret;
     }
     blips() {
-        this.flush();
+        this.flushPerson();
         const ret = [];
         // regroup by same pos
         const PersonByPos = new Map();

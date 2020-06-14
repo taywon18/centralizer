@@ -7,6 +7,7 @@ import cors = require('cors');
 import routes from './routes/index';
 import player from './routes/player';
 import retrieve from './routes/retrieve';
+import push from './routes/push';
 
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/player', player);
 app.use('/retrieve', retrieve);
+app.use('/push', push);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
