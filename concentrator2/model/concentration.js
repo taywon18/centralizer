@@ -46,12 +46,14 @@ class Concentration {
             const firstPerson = persons[0];
             let type = "unknown";
             // first priority = vehicle
-            if (firstPerson.carType === 497)
+            if (firstPerson.carType == 497)
                 type = "air";
-            else if (firstPerson.carType === 596 || firstPerson.carType === 597) //lspd or sfpd
+            else if (firstPerson.carType == 596 || firstPerson.carType == 597) //lspd or sfpd
                 type = "policecar";
-            else if (firstPerson.carType === 541) //bullet
+            else if (firstPerson.carType == 541) //bullet
                 type = "ctd";
+            else if (firstPerson.carType == 0) //ped
+                type = "ped";
             ret.push(new Blip_1.Blip(type, firstPerson.position, persons.join(","), firstPerson.occupation, persons));
         }
         /*for (let [k, v] of this.LastPerson) {
