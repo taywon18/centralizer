@@ -60,6 +60,8 @@ class Concentration {
                 type = "policecar";
             else if (firstPerson.carType === 541) //bullet
                 type = "ctd";
+            else if (firstPerson.carType === 0) //bullet
+                type = "ped";
 
 
 
