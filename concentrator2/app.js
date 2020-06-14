@@ -3,11 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const debug = require("debug");
 const express = require("express");
 const path = require("path");
+const cors = require("cors");
 const index_1 = require("./routes/index");
 const player_1 = require("./routes/player");
 const retrieve_1 = require("./routes/retrieve");
 const app = express();
 app.use(express.json());
+app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

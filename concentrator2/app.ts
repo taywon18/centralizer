@@ -1,14 +1,19 @@
 import debug = require('debug');
 import express = require('express');
 import path = require('path');
+import cors = require('cors');
+
 
 import routes from './routes/index';
 import player from './routes/player';
 import retrieve from './routes/retrieve';
 
+
 const app = express();
 
 app.use(express.json()); 
+app.use(cors());
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
