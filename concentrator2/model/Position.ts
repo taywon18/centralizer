@@ -10,4 +10,8 @@ export class Position {
 		this.z = data["z"] | 0;
 		this.rotz = data["rotz"] | 0;
 	}
+
+	public toString(): string {
+		return this.x + ',' + this.y + ',' + this.z
+	}
 }

@@ -9,7 +9,8 @@ const router = express.Router();
 router.get('/', (req: express.Request, res: express.Response) => {
 	try {
 		let ret = {
-			blips: concentrator.blips()
+			blips: concentrator.blips(),
+			persons: concentrator.persons()
 		};
 		res.json(ret).status(200).end();
 	}

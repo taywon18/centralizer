@@ -24,4 +24,8 @@ export class Person {
 		this.carPassengerCount = data["carPassengerCount"] | 0;
 		this.lastRefresh = new Date();
 	}
+
+	public toString(): string {
+		return this.name;
+	}
 };

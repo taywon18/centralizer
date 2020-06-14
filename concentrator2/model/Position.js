@@ -8,6 +8,9 @@ class Position {
         this.z = data["z"] | 0;
         this.rotz = data["rotz"] | 0;
     }
+    toString() {
+        return this.x + ',' + this.y + ',' + this.z;
+    }
 }
 exports.Position = Position;
 //# sourceMappingURL=Position.js.map
