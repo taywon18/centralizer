@@ -18,9 +18,9 @@ class Concentration {
     }
     blips() {
         this.flush();
-        let ret = [];
+        const ret = [];
         for (let [k, v] of this.LastPerson) {
-            ret.push(new Blip_1.Blip("person", v.position, v.name));
+            ret.push(new Blip_1.Blip("person", v.position, v.name, v.occupation));
         }
         return ret;
     }

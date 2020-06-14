@@ -14,7 +14,7 @@ router.post('/', (req, res) => {
         res.send("done");
     }
     catch (e) {
-        res.send("Err: " + e);
+        res.status(400).send(e);
     }
 });
 exports.default = router;
