@@ -21,7 +21,7 @@ class Concentration {
 
         const ret: Blip[] = [];
         for (let [k, v] of this.LastPerson) {
-            ret.push(new Blip("person", v.position, v.name, v.occupation));
+            ret.push(new Blip("person", v.position, v.name, v.occupation, [v]));
         }
 
         return ret;
