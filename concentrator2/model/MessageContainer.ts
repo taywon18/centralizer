@@ -32,9 +32,9 @@ export class MessageContainer {
         if (msg.date < this.oldestMessage)
             this.oldestMessage = msg.date;
 
-        this.PrimHash.sort((a, b) => a.date.getTime() - b.date.getTime());
+        this.PrimHash.sort((a, b) => b.date.getTime() - a.date.getTime());
 
         if (this.PrimHash.length > this.maxMessagePerHash)
-            this.PrimHash.slice(0, this.maxMessagePerHash-1);
+            this.PrimHash = this.PrimHash.slice(0, this.maxMessagePerHash-1);
 	}
 };
