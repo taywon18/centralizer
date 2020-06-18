@@ -1,25 +1,22 @@
 import { Message } from "./Message";
 
 export class MessageContainer {
-    PrimHash = new Map<string, Message>();
+    PrimHash: Message[] = [];
     useSecondaryHash = false;
     maxMessagePerHash = 50;
     oldestMessage = new Date();
 
     contains(msg: Message) {
-        if (this.PrimHash.has(msg.toString()))
-            return true;
-
+        const hash = msg.toString();
+        for (const m of this.PrimHash)
+            if (m.toString() == hash)
+                return true;
         return false;
-    }
-
-    hash(): Map<string, Message> {
-        return this.PrimHash;
     }
 
     all(): Message[] {
         const ret: Message[] = [];
-        for (const [k, v] of this.PrimHash.entries()) {
+        for (const v of this.PrimHash) {
             ret.push(v);
         }
 
@@ -30,14 +27,14 @@ export class MessageContainer {
         if (this.contains(msg))
             return;
 
-        this.hash().set(msg.toString(), msg);
+        this.PrimHash.push(msg);
 
         if (msg.date < this.oldestMessage)
             this.oldestMessage = msg.date;
 
-        if (this.hash().size > this.maxMessagePerHash)
-            for (const [k, v] of this.PrimHash.entries())
-                if (v.date.getTime() < (new Date()).getTime() - 600000)
-                    this.PrimHash.delete(k);
+        this.PrimHash.sort((a, b) => a.date.getTime() - b.date.getTime());
+
+        if (this.PrimHash.length > this.maxMessagePerHash)
+            this.PrimHash.slice(0, this.maxMessagePerHash-1);
 	}
 };
